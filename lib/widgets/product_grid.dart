@@ -17,9 +17,13 @@ class ProductGrid extends StatelessWidget {
           childAspectRatio: 3 / 2,
         ),
         itemBuilder: (ctx, i) {
-          return ChangeNotifierProvider.value(
-            value: loadedProducts[i],
-            child: ProductItem(),
+          return Consumer<Products>(
+            builder: (key, builder, _) {
+              return ChangeNotifierProvider.value(
+                value: loadedProducts[i],
+                child: ProductItem(),
+              );
+            },
           );
         });
   }
