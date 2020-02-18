@@ -1,4 +1,4 @@
-import 'package:epasal/model/product.dart';
+import 'package:epasal/provider/product.dart';
 import 'package:flutter/material.dart';
 
 class Products with ChangeNotifier {
@@ -39,5 +39,23 @@ class Products with ChangeNotifier {
 
   List<Product> get items {
     return [..._items];
+  }
+
+  Product findById(String id) {
+    return items.firstWhere((prod) {
+      return prod.id == id;
+    });
+  }
+
+  void addProducts() {
+    _items.add(Product(
+        id: "second",
+        title: "Shoes",
+        price: 3000,
+        description: "Comfortable shoes for anywhere you choose to go",
+        imageUrl:
+            "https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/e06ae7c7b4d14a16acb3a999005a8b6a_9366/Lite_Racer_RBN_Shoes_White_F36653_01_standard.jpg",
+        isFavourite: false));
+    notifyListeners();
   }
 }

@@ -10,9 +10,7 @@ class ProductDetails extends StatelessWidget {
     //we get single product item from the provider
 
     final loadedProduct =
-        Provider.of<Products>(context).items.firstWhere((prod) {
-      return prod.id == id;
-    });
+        Provider.of<Products>(context, listen: false).findById(id);
 
     return Scaffold(
       appBar: AppBar(
