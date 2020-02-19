@@ -36,11 +36,19 @@ class Products with ChangeNotifier {
             "https://d1nxj5numvhshx.cloudfront.net/13561-large_default/selected-homme-shd-pima-white-t-shirt.jpg",
         isFavourite: false),
   ];
-
+  //---- this returns all items of the product list----
   List<Product> get items {
     return [..._items];
   }
 
+  // -- this returns only gacourite product form the list----
+  List<Product> get favourites {
+    return _items.where((prodItem) {
+      return prodItem.isFavourite;
+    }).toList();
+  }
+
+  // --- this returns particular item from id----
   Product findById(String id) {
     return items.firstWhere((prod) {
       return prod.id == id;

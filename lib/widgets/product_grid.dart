@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import 'product_item.dart';
 
 class ProductGrid extends StatelessWidget {
+  final bool showFav;
+  ProductGrid(this.showFav);
+
   @override
   Widget build(BuildContext context) {
     final loadedProducts = Provider.of<Products>(context).items;
@@ -17,13 +20,9 @@ class ProductGrid extends StatelessWidget {
           childAspectRatio: 3 / 2,
         ),
         itemBuilder: (ctx, i) {
-          return Consumer<Products>(
-            builder: (key, builder, _) {
-              return ChangeNotifierProvider.value(
-                value: loadedProducts[i],
-                child: ProductItem(),
-              );
-            },
+          return ChangeNotifierProvider.value(
+            value: loadedProducts[i],
+            child: ProductItem(),
           );
         });
   }
