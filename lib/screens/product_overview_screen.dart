@@ -1,6 +1,9 @@
+import 'package:epasal/provider/cart_provider.dart';
+import 'package:epasal/screens/cart_screen.dart';
 import 'package:epasal/widgets/badge.dart';
 import 'package:epasal/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum FilterOptions { Favourites, All }
 
@@ -48,13 +51,19 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               ),
             ],
           ),
-          Badge(
-            child: IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
-            ),
-            value: "0",
-          )
+          Consumer<Cart>(
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.pushNamed(context, CartScreen.routeId);
+                },
+              ),
+              builder: (_, cart, child) {
+                return Badge(
+                  child: child,
+                  value: cart.itemCount.toString(),
+                );
+              })
         ],
       ),
       body: ProductGrid(
